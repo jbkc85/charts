@@ -1,0 +1,10 @@
+apiVersion: v1
+name: moodle
+version: 0.1.0
+description: A Moodle Helm Chart for Kubernetes.  Moodle is an open-source Learning Management System written in PHP.
+sources:
+  - https://hub.docker.com/r/jbkc85/docker-moodle/
+  - https://moodle.org
+maintainers:
+  - name: Jason Cameron
+    email: jbkc85@gmail.com

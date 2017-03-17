@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  replicas: {{ .Values.moodle.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.moodle.image.repository }}:{{ .Values.moodle.image.tag }}"
+        imagePullPolicy: {{ .Values.moodle.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.moodle.service.containerPort }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.moodle.service.containerPort }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.moodle.service.containerPort }}
+        resources:
+{{ toYaml .Values.moodle.resources | indent 12 }}

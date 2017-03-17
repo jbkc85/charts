@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+spec:
+  type: {{ .Values.moodle.service.type }}
+  ports:
+  - port: {{ .Values.moodle.service.externalPort }}
+    targetPort: {{ .Values.moodle.service.containerPort }}
+    protocol: TCP
+    name: {{ .Values.moodle.service.name }}
+  selector:
+    app: {{ template "fullname" . }}

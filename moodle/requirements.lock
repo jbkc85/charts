@@ -1,0 +1,12 @@
+dependencies:
+- name: mysql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.2.5
+- name: postgresql
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.6.0
+- name: memcached
+  repository: https://kubernetes-charts.storage.googleapis.com/
+  version: 0.4.1
+digest: sha256:74ea3bca5fc4dc9ca9328332e39163815032d8262d2d3b671bb97590e1c35cd2
+generated: 2017-03-16T22:40:07.939136192-05:00
