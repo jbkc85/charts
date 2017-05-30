@@ -39,36 +39,27 @@ moodle:
 
 postgresql:
   enabled: true
-  image: postgres
-  imageTag: 9.6-alpine
   pullPolicy: IfNotPresent
-  replicas: 1
-  metrics:
-    image:
-      repository: wrouesnel/postgres_exporter
-      tag: v0.1.2
-      pullPolicy: IfNotPresent
-      service:
-        name: postgresql-exporter
-        externalPort: 9187
-        containerPort: 9187
-      resources:
-        limits:
-          cpu: 75m
-          memory: 15Mi
-        requests:
-          cpu: 50m
-          memory: 10Mi
+
+postgresql-metrics:
+  image:
+    repository: wrouesnel/postgres_exporter
+    tag: v0.1.2
+    pullPolicy: IfNotPresent
+    service:
+      name: postgresql-exporter
+      externalPort: 9187
+      containerPort: 9187
+    resources:
+      limits:
+        cpu: 75m
+        memory: 15Mi
+      requests:
+        cpu: 50m
+        memory: 10Mi
 
 mysql:
   enabled: false
-  image:
-    repository: mysql
-    tag: "5.7"
-    pullPolicy: IfNotPresent
-  service:
-    name: mysql
-  replicas: 1
 
 memcached:
   enabled: false
@@ -82,19 +73,20 @@ memcached:
     requests:
       cpu: 75m
       memory: 64mi
-  metrics:
-    image:
-      repository: prom/memcached-exporter
-      tag: latest
-      pullPolicy: IfNotPresent
-    service:
-      name: memcached-exporter
-      externalPort: 9106
-      containerPort: 9106
-    resources:
-      limits:
-        cpu: 75m
-        memory: 15Mi
-      requests:
-        cpu: 50m
-        memory: 10Mi
+
+memcached-metrics:
+  image:
+    repository: prom/memcached-exporter
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    name: memcached-exporter
+    externalPort: 9106
+    containerPort: 9106
+  resources:
+    limits:
+      cpu: 75m
+      memory: 15Mi
+    requests:
+      cpu: 50m
+      memory: 10Mi

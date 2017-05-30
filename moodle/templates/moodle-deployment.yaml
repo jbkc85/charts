@@ -15,12 +15,30 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.moodle.image.repository }}:{{ .Values.moodle.image.tag }}"
         imagePullPolicy: {{ .Values.moodle.image.pullPolicy }}
+        env:
+          - name: MOODLE_DB_TYPE
+            valueFrom:
+              secretKeyRef:
+                name: {{.Chart.Name }}-secrets
+                key: dbtype
+          - name: MOODLE_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{.Chart.Name }}-secrets
+                key: dbuser
+          - name: MOODLE_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{.Chart.Name }}-secrets
+                key: dbpassword
         ports:
         - containerPort: {{ .Values.moodle.service.containerPort }}
+# included container-resources local module for Moodle
         livenessProbe:
           httpGet:
             path: /
             port: {{ .Values.moodle.service.containerPort }}
+# included container-resources local module for Moodle
         readinessProbe:
           httpGet:
             path: /
